@@ -20,7 +20,7 @@ const buttonStopRef = document.querySelector('button.stop');
 buttonStartRef.addEventListener('click', changeColor);
 buttonStopRef.addEventListener('click', stopChangeColor);
 
-let changeColorWithInterval;
+let changeColorWithInterval = null;
 function changeColor(event) {
   event.preventDefault();
   buttonStartRef.setAttribute('disabled', true);
