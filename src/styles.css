@@ -20,11 +20,14 @@ body {
   background-color: #fff;
   color: #333333;
 }
-
+ul {
+  list-style: none;
+}
 button {
   width: 200px;
-  background-color: black;
+  border-color: black;
   border-radius: 4px;
+  font-size: 14px;
 }
 button.start {
   background-color: aqua;

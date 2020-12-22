@@ -1,55 +1,41 @@
 import buttonsTpl from './templates/buttons.hbs';
 import './styles.css';
 
-// const checkboxRef = document.querySelector('#theme-switch-toggle');
+const colors = [
+  '#FFFFFF',
+  '#2196F3',
+  '#4CAF50',
+  '#FF9800',
+  '#009688',
+  '#795548',
+];
 const bodyRef = document.querySelector('.body');
 const buttonRef = document.querySelector('ul.button');
-console.log(bodyRef);
-console.log(buttonRef);
-console.log(buttonsTpl);
 
-const menuMarcup = buttonsTpl;
-// const Theme = {
-//   LIGHT: 'light-theme',
-//   DARK: 'dark-theme',
-// };
-// const localTheme = localStorage.getItem('theme');
-// const localcheckboxValue = localStorage.getItem('checkboxValue');
-// addLocalTheme();
+buttonRef.insertAdjacentHTML('beforeend', buttonsTpl());
 
-// checkboxRef.addEventListener('change', changeTheme);
+const buttonStartRef = document.querySelector('button.start');
+const buttonStopRef = document.querySelector('button.stop');
 
-buttonRef.insertAdjacentHTML('beforeend', menuMarcup);
+buttonStartRef.addEventListener('click', changeColor);
+buttonStopRef.addEventListener('click', stopChangeColor);
 
-// // Второй вариант  создания и добавления меню
-// // const menuMarcup = createMenu(menuList);
-// // function createMenu(menuList) {
-// //   return menuList.map(menuItemTpl).join('');
-// // }
+let changeColorWithInterval;
+function changeColor(event) {
+  event.preventDefault();
+  buttonStartRef.setAttribute('disabled', true);
+  const randomColor = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  };
+  changeColorWithInterval = setInterval(() => {
+    randomColor(0, 5);
+    bodyRef.style.backgroundColor = colors[randomColor(0, 5)];
+    // console.log(colors[randomColor(0, 5)]);
+  }, 1000);
+}
 
-// function changeTheme(event) {
-//   event.preventDefault();
-//   const checkBoxValue = event.target.checked;
-
-//   if (checkBoxValue) {
-//     localStorage.setItem('theme', Theme.DARK);
-
-//     bodyRef.classList.add(Theme.DARK);
-//     bodyRef.classList.remove(Theme.LIGHT);
-//   } else {
-//     localStorage.setItem('theme', Theme.LIGHT);
-
-//     bodyRef.classList.add(Theme.LIGHT);
-//     bodyRef.classList.remove(Theme.DARK);
-//   }
-// }
-
-// console.log(localcheckboxValue);
-// function addLocalTheme() {
-//   if (localTheme) {
-//     bodyRef.classList.add(localTheme);
-//     if (localTheme === Theme.DARK) {
-//       checkboxRef.checked = true;
-//     }
-//   }
-// }
+function stopChangeColor(event) {
+  buttonStartRef.removeAttribute('disabled', true);
+  event.preventDefault();
+  clearInterval(changeColorWithInterval);
+}
