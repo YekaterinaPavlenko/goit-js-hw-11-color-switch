@@ -21,16 +21,17 @@ buttonStartRef.addEventListener('click', changeColor);
 buttonStopRef.addEventListener('click', stopChangeColor);
 
 let changeColorWithInterval = null;
+const randomColor = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
 function changeColor(event) {
   event.preventDefault();
   buttonStartRef.setAttribute('disabled', true);
-  const randomColor = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  };
+
   changeColorWithInterval = setInterval(() => {
     randomColor(0, 5);
-    bodyRef.style.backgroundColor = colors[randomColor(0, 5)];
-    // console.log(colors[randomColor(0, 5)]);
+    bodyRef.style.backgroundColor = colors[randomColor(0, colors.length - 1)];
+    console.log(colors[randomColor(0, colors.length - 1)]);
   }, 1000);
 }
 
