@@ -29,7 +29,6 @@ function changeColor(event) {
   buttonStartRef.setAttribute('disabled', true);
 
   changeColorWithInterval = setInterval(() => {
-    randomColor(0, 5);
     bodyRef.style.backgroundColor = colors[randomColor(0, colors.length - 1)];
     console.log(colors[randomColor(0, colors.length - 1)]);
   }, 1000);
